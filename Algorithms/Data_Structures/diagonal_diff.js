@@ -4,13 +4,23 @@
 
 function diagonalDifference(arr) {
     // Write your code here
-    
-
-    let leftToRightDiagSum = arr[0][0] + arr[1][1] + arr[2][2];
-    let rightToLeftDiagSum = arr[0][2] + arr[1][1] + arr[2][0];
-
-    let result = Math.abs(leftToRightDiagSum - rightToLeftDiagSum);
-
-    return result;
-
+    // Calculate the diagnoals as arrays
+    const   leftDiag = [],
+            rightDiag = [],
+            n = arr.length;
+    for (let i = 0; i < n; i++) {
+        leftDiag.push(arr[i][i]);
+        rightDiag.push(arr[i][n-i-1]);
+    }
+    // Reduce the arrays to a singular value
+    let ldVal = 0,
+        rdVal = 0;
+    ldVal = leftDiag.reduce((total, curVal) => {
+        return total += curVal;
+    })
+    rdVal = rightDiag.reduce((total, curVal) => {
+        return total += curVal;
+    })
+    // Calc abs() the difference
+    return Math.abs(ldVal - rdVal);
 }
